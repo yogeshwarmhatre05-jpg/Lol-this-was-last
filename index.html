@@ -125,6 +125,8 @@ button:hover{
   </div>
 
   <div class="controls">
+<div class="controls">
+   <button onclick="prevSong()">⏮</button>
     <button onclick="playVideo()">▶</button>
     <button onclick="pauseVideo()">❚❚</button>
     <button onclick="nextSong()">⏭</button>
@@ -133,15 +135,19 @@ button:hover{
 </div>
 
 <script>
-
 let songs = [
   {src:"https://youtu.be/qdpXxGPqW-Y", name:"Faded - Alan Walker"},
   {src:"https://youtu.be/kcsGhOmULxQ", name:"Golden Brown - The Stranglers"},
   {src:"https://youtu.be/9I9c20LHmzY", name:"Come As You Are - Nirvana"},
-  {src:"https://youtu.be/SDNA934EEVk", name:"A Walk - Tycho"}, 
-  {src:"https://youtu.be/A3xxG5zHuCA", name:"Passo Bem Solto - ATLXS"}
-];
+  {src:"https://youtu.be/SDNA934EEVk", name:"A Walk - Tycho"},
+  {src:"https://youtu.be/A3xxG5zHuCA", name:"Passo Bem Solto - ATLXS"},
+  {src:"https://youtu.be/vi72_ggUCHU", name:"Keep Up - ODETARI"},
+  {src:"https://youtu.be/i4bWViFpd0Q", name:"Army Dreamers - Kate Bush"},
 
+  {src:"https://youtu.be/EoNWCYNTANA", name:"If I Killed Someone for You - Alec Benjamin"},
+  {src:"https://youtu.be/y1uzBncUsQQ", name:"Origami - The Rare Occasions"},
+  {src:"https://youtu.be/7U1LFCY70nA", name:"Ava - Underdog"}
+];
 let index = 0;
 let frame = document.getElementById("playerFrame");
 let text = document.getElementById("songText");
@@ -161,6 +167,11 @@ function convert(url){
 function loadVideo(i){
   frame.src = convert(songs[i].src);
   text.innerText = "Now Playing: " + songs[i].name;
+}
+function prevSong(){
+  index--;
+  if(index < 0) index = songs.length - 1;
+  loadVideo(index);
 }
 
 function playVideo(){
