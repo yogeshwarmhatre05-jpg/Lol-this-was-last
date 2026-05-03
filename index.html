@@ -66,10 +66,10 @@ body{
   100%{transform:translateX(-100%);}
 }
 
-/* 🎬 VIDEO */
+/* 🎬 RESPONSIVE VIDEO */
 .screen{
   width:100%;
-  aspect-ratio:16/9;   /* keeps perfect video ratio */
+  aspect-ratio:16/9;
   border:2px solid #cbd5f5;
   border-radius:6px;
   overflow:hidden;
@@ -81,14 +81,12 @@ iframe{
   border:none;
 }
 
-
-/* 🔘 CONTROLS (INSIDE, SPACED) */
+/* 🔘 CONTROLS */
 .controls{
   display:flex;
   justify-content:center;
   gap:10px;
   margin-top:5px;
-  padding:2px 4px;
 }
 
 button{
@@ -118,16 +116,21 @@ button:hover{
   <div class="live-dot"></div>
 
   <div class="marquee">
-    <span id="songText">Now Playing: </span>
+    <span id="songText">Now Playing:</span>
   </div>
 
   <div class="screen">
-    <iframe id="playerFrame" src="" allow="autoplay"></iframe>
+    <iframe 
+      id="playerFrame" 
+      src="" 
+      allow="autoplay; fullscreen" 
+      allowfullscreen>
+    </iframe>
   </div>
 
   <div class="controls">
     <button onclick="playVideo()">▶</button>
-    <button onclick="pauseVideo()">■</button>
+    <button onclick="pauseVideo()">⏸</button>
     <button onclick="nextSong()">⏭</button>
   </div>
 
@@ -135,25 +138,31 @@ button:hover{
 
 <script>
 
+// 🔗 FULL YOUTUBE LINKS
 let songs = [
-  {id:"qdpXxGPqW-Y", name:"Faded by Alan Walker"},
-{id:"qHDJSRlNhVs", name:"Spectre by Alan Walker"}
-  {id:"VIDEO_ID_3", name:"Song 3"},
-  {id:"VIDEO_ID_4", name:"Song 4"},
-  {id:"VIDEO_ID_5", name:"Song 5"},
-  {id:"VIDEO_ID_6", name:"Song 6"},
-  {id:"VIDEO_ID_7", name:"Song 7"},
-  {id:"VIDEO_ID_8", name:"Song 8"},
-  {id:"VIDEO_ID_9", name:"Song 9"},
-  {id:"VIDEO_ID_10", name:"Song 10"}
+  {src:"https://youtu.be/qdpXxGPqW-Y", name:"Faded - Alan Walker"},
+  {src:"https://youtu.be/qHDJSRlNhVs", name:"Spectre - Alan Walker"}
 ];
 
 let index = 0;
 let frame = document.getElementById("playerFrame");
 let text = document.getElementById("songText");
 
+// convert link → embed
+function convert(url){
+  if(url.includes("youtu.be")){
+    let id = url.split("youtu.be/")[1].split("?")[0];
+    return "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
+  }
+  if(url.includes("watch?v=")){
+    let id = url.split("v=")[1].split("&")[0];
+    return "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
+  }
+  return url;
+}
+
 function loadVideo(i){
-  frame.src = "https://www.youtube.com/embed/" + songs[i].id + "?enablejsapi=1";
+  frame.src = convert(songs[i].src);
   text.innerText = "Now Playing: " + songs[i].name;
 }
 
