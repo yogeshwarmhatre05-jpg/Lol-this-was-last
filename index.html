@@ -7,7 +7,7 @@
 <style>
 body{
   margin:0;
-  background:#000080;
+  background:#112D4E; /* changed */
   display:flex;
   justify-content:center;
   align-items:center;
@@ -27,7 +27,6 @@ body{
   box-sizing:border-box;
 }
 
-/* 🟢 GREEN DOT */
 .live-dot{
   width:8px;
   height:8px;
@@ -46,7 +45,6 @@ body{
   100%{opacity:1;}
 }
 
-/* 📝 SCROLL TEXT */
 .marquee{
   width:100%;
   overflow:hidden;
@@ -66,7 +64,6 @@ body{
   100%{transform:translateX(-100%);}
 }
 
-/* 🎬 RESPONSIVE VIDEO */
 .screen{
   width:100%;
   aspect-ratio:16/9;
@@ -81,7 +78,6 @@ iframe{
   border:none;
 }
 
-/* 🔘 CONTROLS */
 .controls{
   display:flex;
   justify-content:center;
@@ -130,7 +126,7 @@ button:hover{
 
   <div class="controls">
     <button onclick="playVideo()">▶</button>
-    <button onclick="pauseVideo()">🍁</button>
+    <button onclick="pauseVideo()">⏸</button>
     <button onclick="nextSong()">⏭</button>
   </div>
 
@@ -138,7 +134,6 @@ button:hover{
 
 <script>
 
-// 🔗 FULL YOUTUBE LINKS
 let songs = [
   {src:"https://youtu.be/qdpXxGPqW-Y", name:"Faded - Alan Walker"},
   {src:"https://youtu.be/qHDJSRlNhVs", name:"Spectre - Alan Walker"}
@@ -148,7 +143,6 @@ let index = 0;
 let frame = document.getElementById("playerFrame");
 let text = document.getElementById("songText");
 
-// convert link → embed
 function convert(url){
   if(url.includes("youtu.be")){
     let id = url.split("youtu.be/")[1].split("?")[0];
@@ -180,7 +174,7 @@ function pauseVideo(){
 
 function nextSong(){
   index++;
-  if(index >= songs.length) index = 0;
+  if(index >= songs.length) index = 0; // loop playlist
   loadVideo(index);
 }
 
