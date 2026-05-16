@@ -3,465 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day Night Sleeping Cat</title>
+<title>Soccer Skills World Cup Button</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
 
 body{
-  overflow:hidden;
-  height:100vh;
-  background:#87CEEB;
-  transition:background 2s;
-  font-family:Arial,sans-serif;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#0f172a;
+font-family:Arial, sans-serif;
 }
 
-/* SKY */
-.sky{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
+.play-btn{
+padding:14px 24px;
+background:#22c55e;
+color:white;
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+border-radius:14px;
+box-shadow:0 0 15px rgba(34,197,94,0.5);
+transition:0.2s;
 }
 
-/* SUN */
-.sun{
-  position:absolute;
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,#fff8b0 0%,#ffd700 60%,#ffae00 100%);
-  top:70px;
-  right:90px;
-  box-shadow:
-    0 0 50px #ffd700,
-    0 0 120px #ffae00;
-  transition:all 2s;
+.play-btn:hover{
+transform:scale(1.05);
+background:#16a34a;
 }
 
-/* MOON */
-.moon{
-  position:absolute;
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  background:#f3f3f3;
-  top:80px;
-  right:100px;
-  opacity:0;
-  box-shadow:
-    -15px 0 0 #cfcfcf,
-    0 0 50px #fff;
-  transition:all 2s;
-}
-
-/* STARS */
-.star{
-  position:absolute;
-  width:3px;
-  height:3px;
-  background:white;
-  border-radius:50%;
-  opacity:0;
-  animation:twinkle 2s infinite alternate;
-  transition:opacity 2s;
-}
-
-@keyframes twinkle{
-  from{opacity:.3;}
-  to{opacity:1;}
-}
-
-/* GROUND */
-.ground{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:240px;
-  background:
-    linear-gradient(#225c2d,#163d1d);
-}
-
-/* CAT CONTAINER */
-.cat-wrap{
-  position:absolute;
-  left:50%;
-  bottom:120px;
-  transform:translateX(-50%);
-  transition:all 1.5s;
-}
-
-/* SHADOW */
-.shadow{
-  position:absolute;
-  width:250px;
-  height:40px;
-  background:rgba(0,0,0,.25);
-  border-radius:50%;
-  bottom:-10px;
-  left:50%;
-  transform:translateX(-50%);
-  filter:blur(10px);
-}
-
-/* CAT BODY */
-.cat{
-  position:relative;
-  width:260px;
-  height:220px;
-}
-
-/* BODY */
-.body{
-  position:absolute;
-  width:180px;
-  height:120px;
-  background:
-    linear-gradient(145deg,#ffb26b,#ff944d);
-  border-radius:90px;
-  left:40px;
-  top:70px;
-  box-shadow:
-    inset -10px -10px 20px rgba(0,0,0,.15),
-    inset 10px 10px 20px rgba(255,255,255,.25);
-}
-
-/* FUR STRIPES */
-.stripe{
-  position:absolute;
-  width:18px;
-  height:55px;
-  background:rgba(120,60,20,.45);
-  border-radius:20px;
-}
-
-.s1{left:70px;top:92px;transform:rotate(-10deg);}
-.s2{left:100px;top:88px;}
-.s3{left:132px;top:90px;transform:rotate(8deg);}
-.s4{left:162px;top:96px;transform:rotate(14deg);}
-
-/* HEAD */
-.head{
-  position:absolute;
-  width:120px;
-  height:115px;
-  background:
-    linear-gradient(145deg,#ffbc77,#ff9d57);
-  border-radius:50%;
-  left:70px;
-  top:10px;
-  z-index:2;
-  box-shadow:
-    inset -8px -8px 15px rgba(0,0,0,.15),
-    inset 8px 8px 15px rgba(255,255,255,.25);
-}
-
-/* EARS */
-.ear{
-  position:absolute;
-  width:45px;
-  height:60px;
-  background:#ff9d57;
-  clip-path:polygon(50% 0%,0% 100%,100% 100%);
-  top:-28px;
-}
-
-.ear::after{
-  content:"";
-  position:absolute;
-  width:22px;
-  height:35px;
-  background:#ffbfd1;
-  left:11px;
-  top:14px;
-  clip-path:polygon(50% 0%,0% 100%,100% 100%);
-}
-
-.left-ear{left:10px;transform:rotate(-10deg);}
-.right-ear{right:10px;transform:rotate(10deg);}
-
-/* EYES */
-.eye{
-  position:absolute;
-  width:24px;
-  height:28px;
-  background:#111;
-  border-radius:50%;
-  top:45px;
-  transition:all .8s;
-  overflow:hidden;
-}
-
-.eye::after{
-  content:"";
-  position:absolute;
-  width:8px;
-  height:14px;
-  background:#7dff6b;
-  left:8px;
-  top:5px;
-  border-radius:50%;
-}
-
-.left-eye{left:28px;}
-.right-eye{right:28px;}
-
-/* SLEEPING EYES */
-.sleep .eye{
-  height:4px;
-  border-radius:10px;
-  background:#222;
-}
-
-.sleep .eye::after{
-  display:none;
-}
-
-/* NOSE */
-.nose{
-  position:absolute;
-  width:18px;
-  height:14px;
-  background:#ff7a8f;
-  left:51px;
-  top:66px;
-  border-radius:50% 50% 60% 60%;
-}
-
-/* MOUTH */
-.mouth{
-  position:absolute;
-  width:34px;
-  height:20px;
-  border-bottom:3px solid #222;
-  border-radius:0 0 50px 50px;
-  left:43px;
-  top:76px;
-}
-
-/* WHISKERS */
-.whisker{
-  position:absolute;
-  width:42px;
-  height:2px;
-  background:#222;
-}
-
-.w1{left:-30px;top:68px;transform:rotate(-10deg);}
-.w2{left:-32px;top:76px;}
-.w3{left:-30px;top:84px;transform:rotate(10deg);}
-
-.w4{right:-30px;top:68px;transform:rotate(10deg);}
-.w5{right:-32px;top:76px;}
-.w6{right:-30px;top:84px;transform:rotate(-10deg);}
-
-/* LEGS */
-.leg{
-  position:absolute;
-  width:28px;
-  height:70px;
-  background:#ff9d57;
-  bottom:20px;
-  border-radius:20px;
-}
-
-.l1{left:60px;}
-.l2{left:100px;}
-.l3{right:100px;}
-.l4{right:60px;}
-
-/* PAWS */
-.paw{
-  position:absolute;
-  width:34px;
-  height:18px;
-  background:#ffd4b0;
-  bottom:-6px;
-  left:-3px;
-  border-radius:50%;
-}
-
-/* TAIL */
-.tail{
-  position:absolute;
-  width:140px;
-  height:26px;
-  border-radius:20px;
-  background:
-    linear-gradient(90deg,#ff944d,#ffb46f);
-  right:-90px;
-  top:100px;
-  transform-origin:left center;
-  animation:tailMove 3s infinite ease-in-out;
-}
-
-@keyframes tailMove{
-  0%{transform:rotate(12deg);}
-  50%{transform:rotate(-12deg);}
-  100%{transform:rotate(12deg);}
-}
-
-/* SLEEP POSITION */
-.sleep{
-  transform:translateX(-50%) rotate(-6deg);
-}
-
-.sleep .tail{
-  animation:none;
-  transform:rotate(30deg);
-}
-
-/* ZZZ */
-.zzz{
-  position:absolute;
-  right:-20px;
-  top:-10px;
-  font-size:26px;
-  color:white;
-  opacity:0;
-  animation:floatZ 2s infinite;
-}
-
-.sleep .zzz{
-  opacity:1;
-}
-
-@keyframes floatZ{
-  0%{
-    transform:translateY(0);
-    opacity:0;
-  }
-  50%{
-    opacity:1;
-  }
-  100%{
-    transform:translateY(-35px);
-    opacity:0;
-  }
-}
-
-/* NIGHT MODE */
-body.night{
-  background:#07111f;
-}
-
-body.night .sun{
-  opacity:0;
-  transform:translateY(60px);
-}
-
-body.night .moon{
-  opacity:1;
-}
-
-body.night .star{
-  opacity:1;
-}
-
-.info{
-  position:absolute;
-  top:20px;
-  left:20px;
-  color:white;
-  font-size:20px;
-  font-weight:bold;
-  text-shadow:0 0 10px rgba(0,0,0,.5);
-}
 </style>
 </head>
+
 <body>
 
-<div class="sky">
-  <div class="sun"></div>
-  <div class="moon"></div>
-
-  <div class="star" style="top:70px;left:10%;"></div>
-  <div class="star" style="top:120px;left:25%;"></div>
-  <div class="star" style="top:60px;left:40%;"></div>
-  <div class="star" style="top:150px;left:55%;"></div>
-  <div class="star" style="top:90px;left:72%;"></div>
-  <div class="star" style="top:130px;left:85%;"></div>
-  <div class="star" style="top:40px;left:60%;"></div>
-</div>
-
-<div class="info" id="timeText">☀️ Day Time - Cat Awake</div>
-
-<div class="ground"></div>
-
-<div class="cat-wrap" id="catWrap">
-
-  <div class="shadow"></div>
-
-  <div class="cat">
-
-    <div class="tail"></div>
-
-    <div class="body"></div>
-
-    <div class="stripe s1"></div>
-    <div class="stripe s2"></div>
-    <div class="stripe s3"></div>
-    <div class="stripe s4"></div>
-
-    <div class="leg l1"><div class="paw"></div></div>
-    <div class="leg l2"><div class="paw"></div></div>
-    <div class="leg l3"><div class="paw"></div></div>
-    <div class="leg l4"><div class="paw"></div></div>
-
-    <div class="head">
-
-      <div class="ear left-ear"></div>
-      <div class="ear right-ear"></div>
-
-      <div class="eye left-eye"></div>
-      <div class="eye right-eye"></div>
-
-      <div class="nose"></div>
-      <div class="mouth"></div>
-
-      <div class="whisker w1"></div>
-      <div class="whisker w2"></div>
-      <div class="whisker w3"></div>
-
-      <div class="whisker w4"></div>
-      <div class="whisker w5"></div>
-      <div class="whisker w6"></div>
-
-    </div>
-
-    <div class="zzz">Zzz</div>
-
-  </div>
-
-</div>
-
-<script>
-const body = document.body;
-const catWrap = document.getElementById("catWrap");
-const timeText = document.getElementById("timeText");
-
-function updateScene(){
-  const hour = new Date().getHours();
-
-  if(hour >= 18 || hour < 6){
-    body.classList.add("night");
-    catWrap.classList.add("sleep");
-    timeText.innerHTML = "🌙 Night Time - Cat Sleeping";
-  }else{
-    body.classList.remove("night");
-    catWrap.classList.remove("sleep");
-    timeText.innerHTML = "☀️ Day Time - Cat Awake";
-  }
-}
-
-updateScene();
-
-setInterval(updateScene,1000);
-</script>
+<a 
+class="play-btn"
+href="https://soccerskillsworldcup.com/" 
+target="_blank"
+>
+⚽ Play Soccer Skills World Cup
+</a>
 
 </body>
-</html>>
+</html>
